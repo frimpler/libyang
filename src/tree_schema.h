@@ -2089,6 +2089,16 @@ int lys_features_enable(const struct lys_module *module, const char *feature);
 int lys_features_disable(const struct lys_module *module, const char *feature);
 
 /**
+ * @brief Clone features
+ *
+ * Clone the features of a module.
+ *
+ * @param[in] module_src source module for feature cloning
+ * @param[in] module_tgt target module for feature cloning
+ */
+int lys_features_clone(const struct lys_module *module_src, const struct lys_module *module_tgt);
+
+/**
  * @brief Get the current status of the specified feature in the module.
  *
  * @param[in] module Module where the feature is defined.
