@@ -11,7 +11,7 @@ set(CMAKE_MACOSX_RPATH TRUE)
 # set version
 set(LIBYANG_MAJOR_VERSION 0)
 set(LIBYANG_MINOR_VERSION 15)
-set(LIBYANG_MICRO_VERSION 57)
+set(LIBYANG_MICRO_VERSION 63)
 set(LIBYANG_VERSION ${LIBYANG_MAJOR_VERSION}.${LIBYANG_MINOR_VERSION}.${LIBYANG_MICRO_VERSION})
 set(LIBYANG_SOVERSION ${LIBYANG_MAJOR_VERSION}.${LIBYANG_MINOR_VERSION})
 
@@ -162,7 +162,7 @@ set(libsrc
     src/common.c
     src/context.c
     src/log.c
-    src/dict.c
+    src/hash_table.c
     src/resolve.c
     src/validation.c
     src/xml.c

@@ -38,7 +38,7 @@
 #include "resolve.h"
 #include "printer.h"
 #include "parser.h"
-#include "dict_private.h"
+#include "hash_table.h"
 
 static const struct lyd_node *moveto_get_root(const struct lyd_node *cur_node, int options,
                                               enum lyxp_node_type *root_type);
@@ -8004,6 +8004,10 @@ eval_expr_select(struct lyxp_expr *exp, uint16_t *exp_idx, enum lyxp_expr_type e
         break;
     case LYXP_EXPR_NONE:
         ret = eval_path_expr(exp, exp_idx, cur_node, local_mod, set, options);
+        break;
+    default:
+        ret = -1;
+        LOGINT(local_mod ? local_mod->ctx : NULL);
         break;
     }
 

@@ -390,7 +390,7 @@ repeat:
 void
 lys_node_unlink(struct lys_node *node)
 {
-    struct lys_node *parent, *first, **pp;
+    struct lys_node *parent, *first, **pp = NULL;
     struct lys_module *main_module;
 
     if (!node) {
@@ -483,7 +483,14 @@ lys_find_grouping_up(const char *name, struct lys_node *start)
             }
         }
 
-        if (par_iter->parent && (par_iter->parent->nodetype & (LYS_CHOICE | LYS_CASE | LYS_AUGMENT | LYS_USES))) {
+        if (par_iter->nodetype == LYS_EXT) {
+            /* we are in a top-level extension, search grouping in top-level groupings */
+            par_iter = lys_main_module(par_iter->module)->data;
+            if (!par_iter) {
+                /* not connected yet, wait */
+                return NULL;
+            }
+        } else if (par_iter->parent && (par_iter->parent->nodetype & (LYS_CHOICE | LYS_CASE | LYS_AUGMENT | LYS_USES))) {
             continue;
         }
 
