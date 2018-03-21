@@ -2022,6 +2022,9 @@ fill_yin_unique(struct lys_module *module, struct lys_node *parent, struct lyxml
 
         /* store token into unique structure */
         unique->expr[i] = transform_schema2json(module, value);
+        if (!unique->expr[i]) {
+            unique->expr[i] = lydict_insert_zc(module->ctx, strdup(value));
+        }
         if (vaux) {
             *vaux = c;
         }
