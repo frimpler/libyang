@@ -1,0 +1,20 @@
+module parse-yang-with-unique {
+
+   namespace "urn:pfe:params:xml:ns:yang:parse-yang-with-unique";
+   prefix pywu;
+
+   container box {
+      list items {
+         key name;
+         unique "pywu:unique-leaf";
+         leaf name {
+            type string;
+         }
+         leaf unique-leaf {
+            type string;
+         }
+      }
+   }
+
+}
+
