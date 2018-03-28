@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="must-dependcontainer"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:w="urn:libyang:tests:must-dependcontainer">
+    <yang-version value="1.1"/>
+    <namespace uri="urn:libyang:tests:must-dependcontainer"/>
+    <prefix value="w"/>
+    <revision date="2018-03-27">
+        <description>
+            <text>initial revision</text>
+        </description>
+    </revision>
+    <container name="container1">
+        <leaf name="a">
+            <type name="string"/>
+        </leaf>
+    </container>
+    <container name="container2">
+        <must condition="../container1/a = 'valid'"/>
+    </container>
+</module>

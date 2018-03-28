@@ -126,6 +126,21 @@ test_dependency_action(void **state)
 }
 
 static void
+test_dependency_container(void **state)
+{
+    struct state *st = (struct state *)*state;
+
+    /* schema */
+    st->mod = lys_parse_path(st->ctx, TESTS_DIR"/data/files/must-dependcontainer.yin", LYS_IN_YIN);
+    assert_ptr_not_equal(st->mod, NULL);
+
+    st->dt = lyd_new_path(NULL, st->ctx, "/must-dependcontainer:container1/a", "a", 0, 0);
+    assert_ptr_not_equal(st->dt, NULL);
+
+    assert_int_equal(lyd_validate(&(st->dt), LYD_OPT_CONFIG, NULL), 0);
+}
+
+static void
 test_inout(void **state)
 {
     struct state *st = (struct state *)*state;
@@ -185,6 +200,7 @@ int main(void)
     const struct CMUnitTest tests[] = {
                     cmocka_unit_test_setup_teardown(test_dependency_rpc, setup_f, teardown_f),
                     cmocka_unit_test_setup_teardown(test_dependency_action, setup_f, teardown_f),
+                    cmocka_unit_test_setup_teardown(test_dependency_container, setup_f, teardown_f),
                     cmocka_unit_test_setup_teardown(test_inout, setup_f, teardown_f),
                     cmocka_unit_test_setup_teardown(test_notif, setup_f, teardown_f)
     };
