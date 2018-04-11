@@ -529,7 +529,7 @@ cast_node_set_to_string(struct lyxp_set *set, struct lyd_node *cur_node, struct 
         return cast_string_elem(set->val.nodes[0].node, local_mod, 1, root_type);
     case LYXP_NODE_ELEM:
     case LYXP_NODE_TEXT:
-        return cast_string_elem(set->val.nodes[0].node, local_mod, 0, root_type);
+        return cast_string_elem(set->val.nodes[0].node, lyd_node_module(set->val.nodes[0].node), 0, root_type);
     case LYXP_NODE_ATTR:
         str = strdup(set->val.attrs[0].attr->value_str);
         if (!str) {
