@@ -4440,7 +4440,8 @@ lys_make_implemented_r(struct lys_module *module, struct unres_schema *unres)
             continue;
         }
 
-        if (!strcmp(module->name, ctx->models.list[i]->name) && ctx->models.list[i]->implemented) {
+        if (!strcmp(module->name, ctx->models.list[i]->name) && ctx->models.list[i]->implemented
+                                                             && module->rev_size != ctx->models.list[i]->rev_size) {
             LOGERR(ctx, LY_EINVAL, "Module \"%s\" in another revision already implemented.", module->name);
             return EXIT_FAILURE;
         }

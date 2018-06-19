@@ -3824,6 +3824,11 @@ lyp_ctx_add_module(struct lys_module *module)
     struct lys_module **newlist = NULL;
     int i;
 
+    if (lyp_ctx_check_module(module) == 1) {
+        LOGVRB("Module %s already in context, do not add.", module->name);
+        return 0;
+    }
+
     assert(!lyp_ctx_check_module(module));
 
 #ifndef NDEBUG
